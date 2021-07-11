@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios';
+const yahooFinance = require("yahoo-finance")
 
 function Stocks() {
-
+// eslint-disable-next-line
   const [results, setResults] = useState(null);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("owoowowow");
 
   const fetchData = () => {
     if(input.length > 2){
-      axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${input.toUpperCase()}&interval=5min&apikey=L15Y13FOAAGMAX87`).then((data) => setResults(data.data))
+      yahooFinance.quote({
+        symbol: 'TSLA',
+        modules: ['price', 'summaryDetail']
+      }, (err, quote) => {
+        console.log(quote)
+      })
     }
   }
 
@@ -19,6 +24,7 @@ function Stocks() {
 
   useEffect(() => {
     document.title = "Stockify - Stocks";
+    fetchData()
     // eslint-disable-next-line
   }, [])
 
@@ -34,10 +40,7 @@ function Stocks() {
       {
         results !== undefined && results
         ?
-        <>
-          {results !== undefined ? results["Meta Data"]["2. Symbol"] : "Nothing"}
-          {results !== undefined ? JSON.stringify(results[Object.keys(results)[1]]) : "Nothing"}
-        </>
+        "Stuff"
         :
         "Nothing"
       }
