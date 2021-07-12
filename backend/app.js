@@ -20,7 +20,7 @@ app.get("/api/:symbol", (req, res) => {
     symbol: symbol.toUpperCase(),
     module: ['price', 'summaryDetail']
   }, (err, quotes) => {
-    if(err) return console.error(err);
+    if(err) {res.json([]); return console.log(err)};
     res.json(quotes)
   })
 })

@@ -13,10 +13,8 @@ function Stocks() {
     const input = inputStock.current.value
     setSearch(true)
     axios.get(`https://stockily-backend.herokuapp.com/api/${input}`).then(data => {
-      if(data.data["price"]["symbol"].toUpperCase() === input.toUpperCase()){
-        setResults(data.data);
-        setSearch(false)
-      }
+      setResults(data.data);
+      setSearch(false)
     })
   }
 
@@ -61,12 +59,20 @@ function Stocks() {
         ?
         <Slide bottom duration={700}>
           <div className="shadow-lg rounded-lg dark-bg p-6 text-center select-none">
-            <div className="flex flex-col m-4">
-              <h3 className="font-semibold">{results["price"]["exchangeName"].replace("GS", "").toUpperCase()} : {results["price"]["symbol"]}</h3>
-              <span>{results["price"]["longName"]}</span>
-              <span className="font-bold">{results["price"]["currencySymbol"]}{results["price"]["regularMarketPrice"]}</span>
-              <span className="text-xs">{seePriceChange(results["price"]["regularMarketPrice"], results["price"]["regularMarketOpen"])}</span>
-            </div>
+            {results.length !== 0 
+              ?
+              <div className="flex flex-col m-4">
+                <h3 className="font-semibold">{results["price"]["exchangeName"].replace("GS", "").toUpperCase()} : {results["price"]["symbol"]}</h3>
+                <span>{results["price"]["longName"]}</span>
+                <span className="font-bold">{results["price"]["currencySymbol"]}{results["price"]["regularMarketPrice"]}</span>
+                <span className="text-xs">{seePriceChange(results["price"]["regularMarketPrice"], results["price"]["regularMarketOpen"])}</span>
+              </div>
+              :
+              <div className="flex flex-col">
+                <span className="text-lg">Nothing found on the server.</span>
+                <span className="text-xs text-gray-500">Please search for another or valid symbol.</span>
+              </div>
+            }
           </div>
         </Slide>
         :
