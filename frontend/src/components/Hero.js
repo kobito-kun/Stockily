@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 function Hero() {
   return (
-    <div className="grid lg:grid-cols-2 h-screen p-10 select-none bg-image">
-      <div className="flex justify-center lg:items-start items-center flex-col p-10 lg:ml-40 z-10">
+    <div className="min-w-screen grid lg:grid-cols-2 h-screen p-10 select-none bg-image">
+      <div className="flex justify-center lg:items-start items-center flex-col lg:p-10 lg:ml-40 z-10">
         <h1 className="text-white text-7xl font-semibold mb-2 text-left">Stockily</h1>
         <span className="text-gray-100 mb-2 lg:text-left text-center">Stocks prices. Anywhere. Immediantly. Rapidly.</span>
         <div>

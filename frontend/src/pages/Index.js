@@ -16,7 +16,7 @@ function Index() {
   }, [])
 
   return (
-    <div className="min-h-screen max-w-screen darker-bg">
+    <div className="h-auto min-w-screen darker-bg">
       <Hero />
       <Information />
       <Showcase left={true} img={SearchSVG} title={"Search for Price"} description={"Instantly get the results of a provided search stock name. All information needed in one place."} button={`Search <i className="fas fa-search"></i>`} />
