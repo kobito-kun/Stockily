@@ -35,7 +35,7 @@ function Stock({symbol, image}) {
         <img src={image} alt={symbol} className="w-16 mx-auto mb-2" />
         <h3 className="font-semibold">{data["price"]["exchangeName"].replace("GS", "").toUpperCase()} : {data["price"]["symbol"]}</h3>
         <span>{data["price"]["longName"]}</span>
-        <span className="font-bold">{data["price"]["currencySymbol"]}{data["price"]["regularMarketPrice"]}</span>
+        <span className="font-bold">{data["price"]["currencySymbol"]}{data["price"]["regularMarketPrice"].toFixed(2)}</span>
         <span className="text-xs">{seePriceChange(data["price"]["regularMarketPrice"], data["price"]["regularMarketOpen"])}</span>
       </div>
       : 

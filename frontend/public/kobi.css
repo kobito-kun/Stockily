@@ -1,3 +1,5 @@
+@import "~react-vis/dist/style";
+
 .darker-bg{
   background-color: #121212;
 }

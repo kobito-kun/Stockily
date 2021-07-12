@@ -9,6 +9,9 @@ import CommunitySVG from '../assets/community.svg';
 import TeamSVG from '../assets/team.svg';
 import SearchSVG from '../assets/searchowo.svg';
 
+// import Fade from 'react-reveal/Fade';
+import Slide from 'react-reveal/Slide';
+
 function Index() {
 
   useEffect(() => {
@@ -19,9 +22,15 @@ function Index() {
     <div className="h-auto min-w-screen darker-bg">
       <Hero />
       <Information />
-      <Showcase left={true} img={SearchSVG} title={"Search for Price"} description={"Instantly get the results of a provided search stock name. All information needed in one place."} button={`Search <i className="fas fa-search"></i>`} />
-      <Showcase left={false} img={CommunitySVG} title={"Open Source"} description={"Everything provided here. Is open-sourced. Free for inspection and free to use. Under MIT License."} button={`GitHub Repository <i className="fab fa-github"></i>`} />
-      <Showcase left={true} img={TeamSVG} title={"Well Developed"} description={"Made with love and passion by Kobi encrypting and securing everything to ensure absolute safety."} button={`Kobi's Website <i className="fas fa-user"></i>`} />
+      <Slide left duration={1000}>
+        <Showcase left={true} img={SearchSVG} title={"Search for Price"} description={"Instantly get the results of a provided search stock name. All information needed in one place."} button={`Search <i className="fas fa-search"></i>`} />
+      </Slide>
+      <Slide right duration={1000}>
+        <Showcase left={false} img={CommunitySVG} title={"Open Source"} description={"Everything provided here. Is open-sourced. Free for inspection and free to use. Under MIT License."} button={`GitHub Repository <i className="fab fa-github"></i>`} />
+      </Slide>
+      <Slide left duration={1000}>
+        <Showcase left={true} img={TeamSVG} title={"Well Developed"} description={"Made with love and passion by Kobi encrypting and securing everything to ensure absolute safety."} button={`Kobi's Website <i className="fas fa-user"></i>`} />
+      </Slide>
       <Footer />
     </div>
   )
