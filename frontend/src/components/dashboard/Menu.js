@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Line } from 'react-chartjs-2';
 
 function Menu() {
 
@@ -6,10 +7,46 @@ function Menu() {
     "AAPL", "TSLA", "COST", "AMZN"
   ]);
 
+  const [options, setOptions] = useState(null);
+  const [data, setData] = useState(null);
+  
   useEffect(() => {
     setInterval(() => {
       setItem([...item])
     }, 500)
+    // eslint-disable-next-line
+  }, [])
+
+  const getRandomValues = () => {
+    return [Math.random() * 20, Math.random() * 20, Math.random() * 20, Math.random() * 20, Math.random() * 20, Math.random() * 20]
+  }
+
+  useEffect(() => {
+    setData({
+      labels: ['1', '2', '3', '4', '5', '6'],
+      datasets: [
+        {
+          label: 'Stock',
+          data: getRandomValues(),
+          fill: false,
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+        },
+      ],
+    });
+
+    setOptions({
+        animation: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      })
     // eslint-disable-next-line
   }, [])
 
@@ -18,10 +55,14 @@ function Menu() {
     <div className="p-10 w-full overflow-y-scroll">
       <div className="flex justify-between items-center lg:flex-row flex-col ">
         <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2 items-center flex justify-center">
-          cgart
+          <Line data={data} options={options} />
         </div>
-        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2"></div>
-        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2"></div>
+        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2 items-center flex justify-center">
+          <Line data={data} options={options} />
+        </div>
+        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2 items-center flex justify-center">
+          <Line data={data} options={options} />
+        </div>
       </div>
       <table className="w-full darkish-bg rounded-lg shadow-lg border-separate p-4 text-center mt-8">
         <thead>

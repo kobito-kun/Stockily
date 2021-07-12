@@ -11,9 +11,9 @@ function Hero() {
           <h1 className="text-white text-7xl font-semibold mb-2 text-left">Stockily</h1>
           <span className="text-gray-100 mb-2 lg:text-left text-center">Stocks prices. Anywhere. Immediantly. Rapidly.</span>
           <div>
-            <Link to="/signup">
+            {/* <Link to="/signup">
               <button className="px-4 py-2 outline-none m-1 rounded-lg shadow dark-bg text-white font-thin hover:bg-gray-600 duration-300">Sign Up</button>
-            </Link>
+            </Link> */}
             <Link to="/stocks">
               <button className="px-4 py-2 outline-none m-1 rounded-lg shadow dark-bg text-white font-thin hover:bg-gray-600 duration-300">Browse Stocks</button>
             </Link>
