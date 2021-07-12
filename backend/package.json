@@ -12,6 +12,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "first-image-search-load": "^0.4.0",
+    "free-google-image-search": "^1.0.0",
     "nodemon": "^2.0.12",
     "yahoo-finance": "^0.3.7"
   }

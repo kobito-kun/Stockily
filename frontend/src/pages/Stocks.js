@@ -7,10 +7,20 @@ function Stocks() {
 
   const fetchData = () => {
     if(input.length > 2){
-      axios.get(`http://localhost:5000/api/${input}`).then(data => setResults(data.data)).then(() => console.log(results))
+      axios.get(`http://stockily-backend.herokuapp.com/api/${input}`).then(data => {
+        if(data.data["price"]["symbol"].toUpperCase() === input.toUpperCase()){
+          setResults(data.data)
+        }
+      })
     }
   }
-  
+
+  const checkLength = () => {
+    if(input.length === 0){
+      setResults(null)
+    }
+  }
+
   const seePriceChange = (first, second) => {
     const currentValue = Number(first - second).toFixed(2);
     if(currentValue > 0){
@@ -22,7 +32,7 @@ function Stocks() {
     }else{
       return (
         <span className="text-red-600">
-          ❗ {currentValue} ❗
+          ❗ -${Math.abs(currentValue)} ❗
         </span>
       )
     }    
@@ -30,6 +40,7 @@ function Stocks() {
 
   useEffect(() => {
     fetchData();
+    checkLength();
     // eslint-disable-next-line
   }, [input, setInput])
 
@@ -38,8 +49,6 @@ function Stocks() {
     fetchData()
     // eslint-disable-next-line
   }, [])
-
-
 
   return (
     <div className="min-h-screen darker-bg">
@@ -63,8 +72,19 @@ function Stocks() {
           </div>
         </div>
         :
-        <>
-        </>
+        <div className="duration-500">
+          {input.length > 0
+          ?
+            <svg class="animate-spin h-20 w-20 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          :
+            <div className="text-xl text-white font-thin animate-pulse">
+              Awaiting Input...
+            </div>
+          }
+        </div>
       }
       </div>
     </div>

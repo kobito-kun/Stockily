@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const yahooFinance = require("yahoo-finance");
-const { quote } = require("yahoo-finance");
+
 
 const app = express();
 const port = process.env.PORT || 5000;
