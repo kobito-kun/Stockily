@@ -7,7 +7,7 @@ function Stocks() {
 
   const fetchData = () => {
     if(input.length > 2){
-      axios.get(`http://stockily-backend.herokuapp.com/api/${input}`).then(data => {
+      axios.get(`https://stockily-backend.herokuapp.com/api/${input}`).then(data => {
         if(data.data["price"]["symbol"].toUpperCase() === input.toUpperCase()){
           setResults(data.data)
         }
@@ -60,7 +60,7 @@ function Stocks() {
       {
         results !== undefined && results
         ?
-        <div className="shadow-lg rounded-lg dark-bg p-6 text-center grid lg:grid-cols-2">
+        <div className="shadow-lg rounded-lg dark-bg p-6 text-center grid lg:grid-cols-2 select-none">
           <div className="flex flex-col m-4">
             <h3 className="font-semibold">{results["price"]["exchangeName"].replace("GS", "").toUpperCase()} : {results["price"]["symbol"]}</h3>
             <span>{results["price"]["longName"]}</span>

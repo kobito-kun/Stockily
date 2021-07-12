@@ -18,7 +18,7 @@ app.get("/api/:symbol", (req, res) => {
   const {symbol} = req.params;
   yahooFinance.quote({
     symbol: symbol.toUpperCase(),
-    module: ['price', 'summaryDetail', 'summaryProfile']
+    module: ['price', 'summaryDetail']
   }, (err, quotes) => {
     if(err) return console.error(err);
     res.json(quotes)
