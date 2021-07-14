@@ -11,9 +11,9 @@ function Hero() {
           <h1 className="text-white text-7xl font-semibold mb-2 text-left">Stockily</h1>
           <span className="text-gray-100 mb-2 lg:text-left text-center">Stocks prices. Anywhere. Immediantly. Rapidly.</span>
           <div>
-            {/* <Link to="/signup">
-              <button className="px-4 py-2 outline-none m-1 rounded-lg shadow dark-bg text-white font-thin hover:bg-gray-600 duration-300">Sign Up</button>
-            </Link> */}
+            <Link to="/dashboard">
+              <button className="px-4 py-2 outline-none m-1 rounded-lg shadow dark-bg text-white font-thin hover:bg-gray-600 duration-300">Dashboard</button>
+            </Link>
             <Link to="/stocks">
               <button className="px-4 py-2 outline-none m-1 rounded-lg shadow dark-bg text-white font-thin hover:bg-gray-600 duration-300">Browse Stocks</button>
             </Link>
@@ -21,7 +21,7 @@ function Hero() {
         </div>
       </Slide>
       <Slide duration={1600} right>
-        <div className="lg:mr-40 right-0 top-0 bottom-0 left-0 lg:opacity-100 opacity-25 z-5 lg:static absolute flex justify-center items-center">
+        <div className="lg:mr-40 right-0 top-0 bottom-0 left-0 filter transform lg:opacity-100 opacity-25 z-5 lg:static absolute flex justify-center items-center">
           <img src={ServerIMG} alt="Server Img" className="w-4/4" />
         </div>
       </Slide>

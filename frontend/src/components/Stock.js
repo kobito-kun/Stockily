@@ -1,41 +1,38 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
+import {seePriceChange, randomNumberGenerator} from '../util/index';
+import coolImages from 'cool-images';
+// import axios from 'axios'
 
 function Stock({symbol, image}) {
   
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://stockily-backend.herokuapp.com/api/${symbol}`).then(data => setData(data.data))
+    // Disabled for Query Limitaions
+    // axios.get(`https://stockily-backend.herokuapp.com/api/${symbol}`).then(data => setData(data.data))
+    const object = {
+      price: {
+        exchangeName: "NASDAQGS",
+        symbol: symbol,
+        longName: `${symbol} .Inc`,
+        currencySymbol: '$',
+        regularMarketPrice: randomNumberGenerator(50, 1000),
+        regularMarketOpen: randomNumberGenerator(50, 1000)
+      }
+    }
+    setData(object)
   // eslint-disable-next-line
   }, [])
-
-  const seePriceChange = (first, second) => {
-    const currentValue = Number(first - second).toFixed(2);
-    if(currentValue > 0){
-      return (
-        <span className="text-green-500">
-          🚀 +${currentValue} 🚀
-        </span>
-      )
-    }else{
-      return (
-        <span className="text-red-600">
-          ❗ -${Math.abs(currentValue)} ❗
-        </span>
-      )
-    }    
-  }
 
   return (
     <div className="dark-bg p-4 rounded-lg shadow-lg flex items-center justify-center flex-col select-none hover:-translate-y-2 transform duration-300 m-2 w-60">
       {data !== undefined && data 
       ?
       <div className="flex flex-col m-4 text-center">
-        <img src={image} alt={symbol} className="w-16 mx-auto mb-2" />
+        <img src={coolImages.one(400, 400)} alt={symbol} className="w-16 h-16 bg-gray-600 rounded-full shadow-lg filter blur-sm mx-auto mb-4" />
         <h3 className="font-semibold">{data["price"]["exchangeName"].replace("GS", "").toUpperCase()} : {data["price"]["symbol"]}</h3>
         <span>{data["price"]["longName"]}</span>
-        <span className="font-bold">{data["price"]["currencySymbol"]}{data["price"]["regularMarketPrice"].toFixed(2)}</span>
+        <span className="font-bold">{data["price"]["currencySymbol"]}{data["price"]["regularMarketPrice"]}</span>
         <span className="text-xs">{seePriceChange(data["price"]["regularMarketPrice"], data["price"]["regularMarketOpen"])}</span>
       </div>
       : 

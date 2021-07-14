@@ -1,38 +1,42 @@
 import React, {useState, useEffect, useRef} from 'react'
-import axios from 'axios';
+// import axios from 'axios';
 import Slide from 'react-reveal/Slide';
 
 import Stock from '../components/Stock';
+import Nav from '../components/Nav';
+
+import {seePriceChange, randomNumberGenerator} from '../util/index';
+import coolImages from 'cool-images';
 
 function Stocks() {
   const [results, setResults] = useState(null);
   const [search, setSearch] = useState();
+  const [warning, setWarning] = useState("");
   const inputStock = useRef(null)
 
   const fetchData = () => {
     const input = inputStock.current.value
-    setSearch(true)
-    axios.get(`https://stockily-backend.herokuapp.com/api/${input}`).then(data => {
-      setResults(data.data);
-      setSearch(false)
-    })
-  }
-
-  const seePriceChange = (first, second) => {
-    const currentValue = Number(first - second).toFixed(2);
-    if(currentValue > 0){
-      return (
-        <span className="text-green-500">
-          🚀 +${currentValue} 🚀
-        </span>
-      )
+    if(input.length > 0){
+      setWarning("")
+      setSearch(true)
+      // Disabled for Query Reasons
+      // axios.get(`https://stockily-backend.herokuapp.com/api/${input}`).then(data => {
+        const object = {
+          price: {
+            exchangeName: "NASDAQGS",
+            symbol: input,
+            longName: `${input} .Inc`,
+            currencySymbol: '$',
+            regularMarketPrice: randomNumberGenerator(50, 1000),
+            regularMarketOpen: randomNumberGenerator(50, 1000)
+          }
+        }
+        setResults(object);
+        setSearch(false)
+      // })
     }else{
-      return (
-        <span className="text-red-600">
-          ❗ -${Math.abs(currentValue)} ❗
-        </span>
-      )
-    }    
+      setWarning("Please input something.")
+    }
   }
 
   useEffect(() => {
@@ -42,14 +46,16 @@ function Stocks() {
 
   return (
     <div className="min-h-screen darker-bg">
+      <Nav />
       <div className="flex justify-center items-center flex-col p-4">
           <h1 className="text-4xl text-white font-thin border-b pb-2">Stocks</h1>
+          <span className="text-xs text-red-600 font-bold text-center mt-2">{warning.length > 0 ? warning : ""}</span>
           <div className="flex lg:flex-row flex-col">
             <input onChange={() => {
               if(inputStock.current.value.length === 0){
                 setResults(null)
               }
-            }}ref={inputStock} className="my-4 px-8 py-4 dark-bg shadow-lg focus:border-gray-700 duration-300 outline-none border-b border-white text-white" placeholder="Search Your Own" />
+            }} ref={inputStock} className="my-4 px-8 py-4 dark-bg shadow-lg focus:border-gray-700 duration-300 outline-none border-b border-white text-white" placeholder="Search Your Own" />
             <button onClick={() => fetchData()} className="border-b border-white py-2 px-4 lg:my-4 hover:bg-gray-700 duration-300 font-thin text-white shadow-lg mx-2 dark-bg">Search</button>
           </div>
       </div>
@@ -62,6 +68,7 @@ function Stocks() {
             {results.length !== 0 
               ?
               <div className="flex flex-col m-4">
+                <img src={coolImages.one(400, 400)} alt={inputStock.current.value} className="w-16 rounded-full shadow-lg filter blur-sm mx-auto mb-4" />
                 <h3 className="font-semibold">{results["price"]["exchangeName"].replace("GS", "").toUpperCase()} : {results["price"]["symbol"]}</h3>
                 <span>{results["price"]["longName"]}</span>
                 <span className="font-bold">{results["price"]["currencySymbol"]}{results["price"]["regularMarketPrice"]}</span>

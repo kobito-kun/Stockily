@@ -1,90 +1,44 @@
-import React, {useState, useEffect} from 'react'
-import { Line } from 'react-chartjs-2';
+import React, {useState, useEffect, useRef} from 'react'
+import Stock from '../Stock';
+import Slide from 'react-reveal/Slide';
 
 function Menu() {
 
+  const stockInput = useRef(null);
+  
   const [item, setItem] = useState([
     "AAPL", "TSLA", "COST", "AMZN"
   ]);
 
-  const [options, setOptions] = useState(null);
-  const [data, setData] = useState(null);
-  
-  useEffect(() => {
-    setInterval(() => {
-      setItem([...item])
-    }, 500)
-    // eslint-disable-next-line
-  }, [])
-
-  const getRandomValues = () => {
-    return [Math.random() * 20, Math.random() * 20, Math.random() * 20, Math.random() * 20, Math.random() * 20, Math.random() * 20]
+  const addStock = () => {
+    const currentValue = stockInput.current.value;
+    setItem([...item, currentValue])
+    stockInput.current.value = "";
   }
 
   useEffect(() => {
-    setData({
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [
-        {
-          label: 'Stock',
-          data: getRandomValues(),
-          fill: false,
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgba(255, 255, 255, 0.2)',
-        },
-      ],
-    });
-
-    setOptions({
-        animation: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-              },
-            },
-          ],
-        },
-      })
+    // setInterval(() => {
+    //   setItem([...item])
+    // }, 500)
     // eslint-disable-next-line
   }, [])
 
-
   return (
-    <div className="p-10 w-full overflow-y-scroll">
-      <div className="flex justify-between items-center lg:flex-row flex-col ">
-        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2 items-center flex justify-center">
-          <Line data={data} options={options} />
+    <Slide right duration={700}>
+      <div className="p-10 w-full overflow-y-scroll">
+        <div>
+          <div className="flex justify-end mb-4 lg:flex-row flex-col">
+            <input ref={stockInput} placeholder="Add a Stock" className="lg:mx-0 mx-2 lg:my-0 my-2 rounded-lg shadow dark-bg px-4 py-2 outline-none" />
+            <button onClick={() => addStock()} className="dark-bg px-4 py-2 rounded-lg shadow mx-2">Add</button>
+          </div>
         </div>
-        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2 items-center flex justify-center">
-          <Line data={data} options={options} />
-        </div>
-        <div className="darkish-bg w-72 h-48 rounded-lg shadow m-2 items-center flex justify-center">
-          <Line data={data} options={options} />
+        <div className="flex flex-wrap justify-center items-center">
+          {item.map(x => (
+            <Stock symbol={x} />
+          ))}
         </div>
       </div>
-      <table className="w-full darkish-bg rounded-lg shadow-lg border-separate p-4 text-center mt-8">
-        <thead>
-          <tr>
-            <th className="border-b border-white">SYMBOL</th>
-            <th className="border-b border-white">PRICE</th>
-            <th className="border-b border-white">CHANGE</th>
-            <th className="border-b border-white">BALANCE</th>
-          </tr>
-        </thead>
-        <tbody>
-          {item.map(x => (
-            <tr>
-              <td className="px-4 py-8">{x}</td>
-              <td>${Number(Math.random() * 100).toFixed(2)}</td>
-              <td>+${Number(Math.random() * 10).toFixed(2)}</td>
-              <td>${Number(Math.random() * 10000).toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    </Slide>
   )
 }
 
