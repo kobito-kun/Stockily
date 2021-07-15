@@ -56,9 +56,7 @@ const getTokenUser = (req, res) => {
 }
 
 app.get("/", (req, res) => {
-  Client.findOne({}, (err, result) => {
-    res.json(result)
-  })
+  res.send("Hewwo")
 })
 
 app.get("/api/symbols/", (req, res) => {
