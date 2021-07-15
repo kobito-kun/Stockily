@@ -23,3 +23,12 @@ export const screenSize = () => {
   const {innerWidth} = window;
   return innerWidth < 740;
 }
+
+export const checkLoggedIn = () => {
+  const token = localStorage.getItem("token")
+  if(token !== null){
+    return true
+  }else{
+    return false
+  }
+}

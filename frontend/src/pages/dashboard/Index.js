@@ -1,22 +1,33 @@
 import React, {useState, useEffect} from 'react'
+import {useHistory} from 'react-router-dom';
+
 import Sidebar from '../../components/dashboard/Sidebar'
 import Menu from '../../components/dashboard/Menu'
 import Account from '../../components/dashboard/Account'
+
+import { checkLoggedIn } from '../../util/index';
 
 function Index() {
 
   const [clicked, setClicked] = useState("Home")
   const [reveal, setReveal] = useState(false);
   const [resizeHide, setResizeHide] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
-    function handleResize() {
+
+    if(!checkLoggedIn()){
+      history.push("/login")
+    }
+
+    const handleResize = () => {
       const {innerWidth: width} = window;
       setReveal(width < 760 ? false : true);
       setResizeHide(width < 760 ? false : true);
     }
     handleResize()
     window.addEventListener('resize', handleResize);
+    // eslint-disable-next-line
   }, []);
 
   return (

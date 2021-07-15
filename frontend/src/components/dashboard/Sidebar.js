@@ -7,7 +7,7 @@ function Sidebar({clicked, setClicked, reveal, setReveal}) {
   const history = useHistory()
 
   const logout = () => {
-    localStorage.removeItem("loginToken")
+    localStorage.clear()
     history.push("/")
   }
 
