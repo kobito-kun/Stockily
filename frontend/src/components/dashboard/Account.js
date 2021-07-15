@@ -18,7 +18,7 @@ function Account() {
         "authorization": `Bearer ${authToken}`
       }
     };
-    axios.get(`http://localhost:5000/api/profile/${username}`, headers).then(data => {
+    axios.get(`https://stockily-backend.herokuapp.com/api/profile/${username}`, headers).then(data => {
       setLoading(false)
       usernameInput.current.value = data.data.username;
       emailInput.current.value = data.data.email;      
@@ -39,7 +39,7 @@ function Account() {
       email: emailInput.current.value,
       password: passwordInput.current.value
     }
-    axios.put(`http://localhost:5000/api/profile`, object, headers).then(data => {
+    axios.put(`https://stockily-backend.herokuapp.com/api/profile`, object, headers).then(data => {
       fetchProfile()
     })
   }

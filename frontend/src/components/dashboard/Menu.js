@@ -28,7 +28,7 @@ function Menu() {
       username: username
     }
 
-    axios.put("http://localhost:5000/api/symbol", object, headers).then(data => fetchStocks()).then(stockInput.current.value = "")
+    axios.put("https://stockily-backend.herokuapp.com/api/symbol", object, headers).then(data => fetchStocks()).then(stockInput.current.value = "")
   }
 
   const fetchStocks = () => {
@@ -38,7 +38,7 @@ function Menu() {
         "authorization": `Bearer ${authToken}`
       }
     };
-    axios.get(`http://localhost:5000/api/symbols/`, headers).then(data => setItem(data.data))
+    axios.get(`https://stockily-backend.herokuapp.com/api/symbols/`, headers).then(data => setItem(data.data))
   }
 
   useEffect(() => {

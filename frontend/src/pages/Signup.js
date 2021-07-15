@@ -23,7 +23,7 @@ function Signup() {
       email: currentEmail
     }
 
-    axios.post("http://localhost:5000/api/signup", object).then(data => {
+    axios.post("https://stockily-backend.herokuapp.com/api/signup", object).then(data => {
       const responseObject = data.data;
       if(responseObject.status === "User Created"){
         localStorage.setItem("token", responseObject.token)

@@ -21,7 +21,7 @@ function Login() {
       password: currentPassword
     }
 
-    axios.post("http://localhost:5000/api/login", object).then(data => {
+    axios.post("https://stockily-backend.herokuapp.com/api/login", object).then(data => {
       const responseObject = data.data;
       setLoading(false)
       if(responseObject.status === "Authenticated"){
@@ -42,7 +42,7 @@ function Login() {
         <span className="text-center text-red-600">
           {warning.length > 0 ? warning : ""}
         </span>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col text-white">
           <input required ref={usernameInput} placeholder="Username" className="focus:ring-2 px-4 py-2 shadow-lg outline-none darker-bg m-1" />
           <input required type="password" ref={passwordInput} placeholder="Password" className="focus:ring-2 px-4 py-2 shadow-lg outline-none darker-bg m-1" />
           <button className="text-white px-4 py-2 m-1 darker-bg" type="submit">
