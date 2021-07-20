@@ -33,7 +33,7 @@ function Index() {
   return (
     <div className="darker-bg max-h-screen text-white flex overflow-x-hidden">
       <Sidebar clicked={clicked} setClicked={setClicked} reveal={reveal} setReveal={setReveal} />
-      <div className={`lg:hidden ${resizeHide ? "hidden" : "absolute z-10 flex w-full p-4 items-center darkish-bg justify-between h-auto"} duration-500 bottom-0 `}>
+      <div className={`lg:hidden ${resizeHide ? "hidden" : "fixed z-10 flex w-full p-4 items-center darkish-bg justify-between h-auto"} duration-500 bottom-0 `}>
         <i onClick={() => setReveal(!reveal)} className="cursor-pointer fas fa-bars"></i>
         <h2>Stockily</h2>
       </div>
