@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const Stock = new Schema({
+const StockSchema = new Schema({
   symbol: String,
   shares: Number,
   username: String,
@@ -11,4 +11,4 @@ const Stock = new Schema({
   }
 });
 
-module.exports.Stock = mongoose.model('Stock', Stock);
+export const Stock = mongoose.model('Stock', StockSchema);
