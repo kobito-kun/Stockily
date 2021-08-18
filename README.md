@@ -2,7 +2,7 @@
 
 A full stack web application made for the purpose of fetching inmediantly stocks prices with a provided symbol.
 
-[Live Preview](https://stockily.vercel.app/) [My Website](https://kobi.lol)
+[Live Preview](https://stockily.vercel.app/) [My Website](https://itskobi.com)
 
 ## Technologies Used
 
@@ -33,7 +33,7 @@ A full stack web application made for the purpose of fetching inmediantly stocks
 To run this project locally, you'll need some prerequisites programs.
 
 - [NodeJS](https://nodejs.org/)
-- 
+
 #### Backend Setup
 
 After cloning this repository & have the required programs installed. Open a command prompt on the folder `/backend` and run:
